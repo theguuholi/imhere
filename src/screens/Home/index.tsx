@@ -1,8 +1,23 @@
-import { Text, TextInput, Pressable, View } from "react-native";
+import { Text, TextInput, Pressable, View, ScrollView } from "react-native";
 import { styles } from "./styles";
 import Participant from "../../components/Participant";
 
 export default function Home() {
+  const participnts = [
+    "Gustavo",
+    "Bruno",
+    "Edu",
+    "Rafael",
+    "Lucas",
+    "Joao",
+    "Pedro",
+    "Paulo",
+    "Marcos",
+    "Felipe",
+    "Carlos",
+    "Rodrigo",
+  ];
+
   handleParticipantAdd = () => {
     console.log("Add participant");
   };
@@ -28,9 +43,15 @@ export default function Home() {
         </Pressable>
       </View>
 
-      <Participant name="Gustavo" onRemove={handleParticipantRemove} />
-      <Participant name="Bruno" onRemove={handleParticipantRemove} />
-      <Participant name="Edu" onRemove={handleParticipantRemove} />
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {participnts.map((participant) => (
+          <Participant
+            key={participant}
+            name={participant}
+            onRemove={handleParticipantRemove}
+          />
+        ))}
+      </ScrollView>
     </View>
   );
 }
