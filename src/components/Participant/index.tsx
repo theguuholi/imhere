@@ -1,17 +1,18 @@
-import { View, Text, TouchableOpacity } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { styles } from "./styles";
 
 type Props = {
   name: string;
+  onRemove: () => void;
 };
 
-export default function Participant({ name }: Props) {
+export default function Participant({ name, onRemove }: Props) {
   return (
     <View style={styles.container}>
       <Text style={styles.name}>{name}</Text>
-      <TouchableOpacity style={styles.button}>
+      <Pressable style={styles.button} onPress={() => onRemove(name)}>
         <Text style={styles.buttonText}>-</Text>
-      </TouchableOpacity>
+      </Pressable>
     </View>
   );
 }

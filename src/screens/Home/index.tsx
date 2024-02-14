@@ -1,10 +1,15 @@
-import { Text, TextInput, TouchableOpacity, View } from "react-native";
+import { Text, TextInput, Pressable, View } from "react-native";
 import { styles } from "./styles";
 import Participant from "../../components/Participant";
 
 export default function Home() {
   handleParticipantAdd = () => {
     console.log("Add participant");
+  };
+
+  handleParticipantRemove = (name: string) => {
+    console.log("Remove participant");
+    console.log(name);
   };
 
   return (
@@ -18,14 +23,14 @@ export default function Home() {
           placeholder="Guest Name"
           placeholderTextColor="#6b6b6b"
         />
-        <TouchableOpacity style={styles.button} onPress={handleParticipantAdd}>
+        <Pressable style={styles.button} onPress={handleParticipantAdd}>
           <Text style={styles.buttonText}>+</Text>
-        </TouchableOpacity>
+        </Pressable>
       </View>
 
-      <Participant name="Gustavo" />
-      <Participant name="Bruno" />
-      <Participant name="Edu" />
+      <Participant name="Gustavo" onRemove={handleParticipantRemove} />
+      <Participant name="Bruno" onRemove={handleParticipantRemove} />
+      <Participant name="Edu" onRemove={handleParticipantRemove} />
     </View>
   );
 }
