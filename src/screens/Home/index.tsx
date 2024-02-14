@@ -1,4 +1,11 @@
-import { Text, TextInput, Pressable, View, FlatList } from "react-native";
+import {
+  Text,
+  TextInput,
+  Pressable,
+  View,
+  FlatList,
+  Alert,
+} from "react-native";
 import { styles } from "./styles";
 import Participant from "../../components/Participant";
 
@@ -19,12 +26,22 @@ export default function Home() {
   ];
 
   handleParticipantAdd = () => {
-    console.log("Add participant");
+    console.log("here!!");
+    if (participnts.includes("Rafael")) {
+      return Alert.alert(
+        "Participante Existe",
+        "Ja existe alguem com esse nome!"
+      );
+    }
+    console.log("Voce adicionou alguem");
   };
 
   handleParticipantRemove = (name: string) => {
-    console.log("Remove participant");
-    console.log(name);
+    console.log("here!");
+    Alert.alert("Remove", `Remover o participante ${name}?`, [
+      { text: "Y", onPress: () => Alert.alert("Removed") },
+      { text: "N", style: "cancel" },
+    ]);
   };
 
   return (
