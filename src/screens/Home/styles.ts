@@ -16,6 +16,11 @@ export const styles = StyleSheet.create({
     color: "#6b6b6b",
     fontSize: 16,
   },
+  emptyList: {
+    color: "#fff",
+    fontSize: 14,
+    textAlign: "center",
+  },
   input: {
     backgroundColor: "#1f1e25",
     height: 56,
