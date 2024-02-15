@@ -8,38 +8,32 @@ import {
 } from "react-native";
 import { styles } from "./styles";
 import Participant from "../../components/Participant";
+import { useState } from "react";
 
 export default function Home() {
-  const participnts = [
-    "Gustavo",
-    "Bruno",
-    "Edu",
-    "Rafael",
-    "Lucas",
-    "Joao",
-    "Pedro",
-    "Paulo",
-    "Marcos",
-    "Felipe",
-    "Carlos",
-    "Rodrigo",
-  ];
+  const [participants, setParticipants] = useState<string[]>([]);
+  const [newParticipant, setNewParticipant] = useState<string>("");
 
   handleParticipantAdd = () => {
-    console.log("here!!");
-    if (participnts.includes("Rafael")) {
+    if (participants.includes(newParticipant)) {
       return Alert.alert(
         "Participante Existe",
         "Ja existe alguem com esse nome!"
       );
     }
-    console.log("Voce adicionou alguem");
+    setParticipants((prevState) => [...prevState, newParticipant]);
+    setNewParticipant("");
   };
 
   handleParticipantRemove = (name: string) => {
-    console.log("here!");
     Alert.alert("Remove", `Remover o participante ${name}?`, [
-      { text: "Y", onPress: () => Alert.alert("Removed") },
+      {
+        text: "Y",
+        onPress: () =>
+          setParticipants((prevState) =>
+            prevState.filter((item) => item !== name)
+          ),
+      },
       { text: "N", style: "cancel" },
     ]);
   };
@@ -54,6 +48,8 @@ export default function Home() {
           style={styles.input}
           placeholder="Guest Name"
           placeholderTextColor="#6b6b6b"
+          onChangeText={setNewParticipant}
+          value={newParticipant}
         />
         <Pressable style={styles.button} onPress={handleParticipantAdd}>
           <Text style={styles.buttonText}>+</Text>
@@ -62,7 +58,7 @@ export default function Home() {
 
       <FlatList
         showsVerticalScrollIndicator={false}
-        data={participnts}
+        data={participants}
         keyExtractor={(item) => item}
         renderItem={({ item }) => (
           <Participant
